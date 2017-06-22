@@ -290,7 +290,7 @@ function loadSounds () {
   ion.sound({
     sounds: [{name: "snap"}, {name: "tap"}],
 
-    path: "/sounds/",
+    path: "sounds/",
     preload: true,
     volume: 1.0
   });

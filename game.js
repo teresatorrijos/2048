@@ -69,6 +69,7 @@ Game2048.prototype._moveLeft = function() {
         newRow[i] = newRow[i] * 2;
         newRow[i + 1] = null;
         that._updateScore(newRow[i]);
+        ion.sound.play("tap");
       }
     }
 
@@ -102,6 +103,7 @@ Game2048.prototype._moveRight = function() {
         newRow[i] = newRow[i] * 2;
         newRow[i - 1] = null;
         that._updateScore(newRow[i]);
+        ion.sound.play("tap");
       }
     }
 
@@ -156,6 +158,7 @@ Game2048.prototype._gameFinished = function(){
 }
 
 Game2048.prototype.move = function(direction) {
+  ion.sound.play("snap");
   if (!this._gameFinished()) {
     switch (direction) {
       case "up":
@@ -219,6 +222,7 @@ var game;
 window.onload = function () {
   game = new Game2048();
   renderTiles();
+  loadSounds();
 };
 
 function renderTiles () {
@@ -281,5 +285,15 @@ function moveListeners (event) {
   updateScore();
   gameStatus();
 };
+
+function loadSounds () {
+  ion.sound({
+    sounds: [{name: "snap"}, {name: "tap"}],
+
+    path: "/sounds/",
+    preload: true,
+    volume: 1.0
+  });
+}
 
 document.addEventListener("keydown", moveListeners);
